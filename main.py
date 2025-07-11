@@ -3,6 +3,7 @@ import uuid
 from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 # --- Constants ---
@@ -60,6 +61,15 @@ app = FastAPI(
     title="Todo List API",
     description="A simple API to manage a list of todo items.",
     version="0.1.0"
+)
+
+# --- CORS Middleware ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
 )
 
 # --- API Endpoints ---
